@@ -1,9 +1,12 @@
 package router
 
 import (
-	"net/http"
-
 	"github.com/gin-gonic/gin"
+	"github.com/isaacRevan24/fitness-tracking/handler"
+)
+
+var (
+	trackingHandler handler.TrackingHandlerInterface = handler.NewTrackingHandler()
 )
 
 type routerRegister struct{}
@@ -17,9 +20,5 @@ func NewRouterRegister() RouterRegisterInterface {
 }
 
 func (*routerRegister) TrackingRouter(router *gin.RouterGroup) {
-	router.POST("/weight", func(c *gin.Context) {
-		c.JSON(http.StatusOK, gin.H{
-			"status": "fit-000",
-		})
-	})
+	router.POST("/weight", trackingHandler.AddWeightRegister)
 }
