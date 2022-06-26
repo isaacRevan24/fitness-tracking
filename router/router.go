@@ -21,10 +21,7 @@ func NewRouterRegister() RouterRegisterInterface {
 
 func (*routerRegister) TrackingRouter(router *gin.RouterGroup) {
 	router.POST("/weight", func(context *gin.Context) {
-
 		response := trackingHandler.AddWeightRegister()
-
-		context.JSON(response.HttpStatus, response)
-
+		context.JSON(response.Status.HttpStatus, response)
 	})
 }

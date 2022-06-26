@@ -9,14 +9,15 @@ import (
 type trackingHandler struct{}
 
 type TrackingHandlerInterface interface {
-	AddWeightRegister() model.FitnessStatusResponse
+	AddWeightRegister() model.FitnessStatus
 }
 
 func NewTrackingHandler() TrackingHandlerInterface {
 	return &trackingHandler{}
 }
 
-func (*trackingHandler) AddWeightRegister() model.FitnessStatusResponse {
+func (*trackingHandler) AddWeightRegister() model.FitnessStatus {
 	status := model.FitnessStatusResponse{HttpStatus: http.StatusOK, Code: "fit-000", Message: "ok"}
-	return status
+	statusResponse := model.FitnessStatus{Status: status}
+	return statusResponse
 }
