@@ -6,6 +6,10 @@ import (
 	"github.com/isaacRevan24/fitness-tracking/model"
 )
 
+var (
+	mapper model.FitnessMapper = model.NewFitnessMapper()
+)
+
 type trackingHandler struct{}
 
 type TrackingHandlerInterface interface {
@@ -17,7 +21,7 @@ func NewTrackingHandler() TrackingHandlerInterface {
 }
 
 func (*trackingHandler) AddWeightRegister() model.FitnessStatus {
-	status := model.FitnessStatusResponse{HttpStatus: http.StatusOK, Code: "fit-000", Message: "ok"}
-	statusResponse := model.FitnessStatus{Status: status}
-	return statusResponse
+	var response model.FitnessStatus
+	mapper.ToSTatus(&response, http.StatusOK, "fit-00", "ok")
+	return response
 }
