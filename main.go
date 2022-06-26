@@ -11,7 +11,7 @@ var (
 
 func main() {
 	r := gin.Default()
-	v1 := r.Group("/v1")
+	v1 := r.Group("/v1/fitness")
 	controllerRegister.TrackingRouter(v1.Group("/tracking"))
-	r.Run()
+	r.Run(":8081")
 }
