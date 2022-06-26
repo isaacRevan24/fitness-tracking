@@ -2,16 +2,16 @@ package main
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/isaacRevan24/fitness-tracking/controller"
+	"github.com/isaacRevan24/fitness-tracking/router"
 )
 
 var (
-	controllerRegister controller.ControllerRegisterInterface = controller.NewController()
+	controllerRegister router.RouterRegisterInterface = router.NewRouterRegister()
 )
 
 func main() {
 	r := gin.Default()
 	v1 := r.Group("/v1")
-	controllerRegister.TrackingController(v1.Group("/tracking"))
+	controllerRegister.TrackingRouter(v1.Group("/tracking"))
 	r.Run()
 }
