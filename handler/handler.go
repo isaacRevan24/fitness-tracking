@@ -22,6 +22,6 @@ func NewTrackingHandler() TrackingHandlerInterface {
 
 func (*trackingHandler) AddWeightRegister() model.FitnessStatus {
 	var response model.FitnessStatus
-	mapper.ToSTatus(&response, http.StatusOK, "fit-00", "ok")
+	mapper.ToSTatusResponse(&response, http.StatusOK, "fit-00", "ok")
 	return response
 }
