@@ -29,11 +29,11 @@ func (*trackingHandler) AddWeightRegister(request model.AddWeightRegisterReq) mo
 	var response model.FitnessResponse
 	id, error := trackingLogic.AddWeightRegister(request)
 	if error != nil {
-		responseStatus := mapper.ToBaseStatus(http.StatusBadRequest, "fit-001", "Error guardando registro.")
+		responseStatus := mapper.ToBaseStatus(http.StatusBadRequest, model.BAD_REQUEST_ERROR_STATUS, model.ADD_WEIGHT_REGISTER_ERROR)
 		mapper.ToFitnessResponse(&response, &responseStatus, nil)
 		return response
 	}
-	responseStatus := mapper.ToBaseStatus(http.StatusOK, "fit-000", "all ok")
+	responseStatus := mapper.ToBaseStatus(http.StatusOK, model.SUCCESS_CODE_STATUS, model.SUCCESS_MESSAGE)
 	responseBody := model.AddWeightRegisterRes{WeightTrackId: id}
 	mapper.ToFitnessResponse(&response, &responseStatus, responseBody)
 	return response

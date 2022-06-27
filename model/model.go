@@ -4,6 +4,19 @@ import (
 	"github.com/google/uuid"
 )
 
+const (
+	SUCCESS_CODE_STATUS          = "FIT-00"
+	INTERNAL_SERVER_ERROR_STATUS = "FIT-01"
+	BAD_REQUEST_ERROR_STATUS     = "FIT-02"
+)
+
+const (
+	SUCCESS_MESSAGE           = "Success."
+	DATA_BASE_ERROR           = "Unable to connect to database."
+	ADD_WEIGHT_REGISTER_ERROR = "Unable to save weight register."
+	INVALID_REQUEST           = "Invalid request parameters."
+)
+
 type BaseStatus struct {
 	HttpStatus int    `json:"-"`
 	Code       string `json:"code"`
