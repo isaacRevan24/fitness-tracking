@@ -22,10 +22,9 @@ func NewTrackingHandler() TrackingHandlerInterface {
 }
 
 func (*trackingHandler) AddWeightRegister() model.FitnessResponse {
-	var status model.FitnessStatusResponse
-	responseBody := model.AddWeightRegisterRes{WeightTrackId: uuid.UUID{}}
 	var response model.FitnessResponse
-	mapper.ToStatusResponse(&status, http.StatusOK, "fit-00", "ok")
-	mapper.ToFitnessResponse(&response, &status.Status, responseBody)
+	responseStatus := mapper.ToBaseStatus(http.StatusOK, "fit-000", "all ok")
+	responseBody := model.AddWeightRegisterRes{WeightTrackId: uuid.UUID{}}
+	mapper.ToFitnessResponse(&response, &responseStatus, responseBody)
 	return response
 }
