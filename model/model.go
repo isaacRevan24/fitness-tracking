@@ -20,7 +20,7 @@ type FitnessRequest[T any] struct {
 
 type FitnessResponse struct {
 	Status BaseStatus `json:"status"`
-	T      any        `json:"body"`
+	T      any        `json:"body,omitempty"`
 }
 
 type AddWeightRegisterReq struct {
