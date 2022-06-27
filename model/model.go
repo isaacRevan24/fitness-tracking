@@ -1,6 +1,8 @@
 package model
 
-import "github.com/google/uuid"
+import (
+	"github.com/google/uuid"
+)
 
 type BaseStatus struct {
 	HttpStatus int    `json:"-"`
@@ -12,8 +14,8 @@ type FitnessStatusResponse struct {
 	Status BaseStatus `json:"status"`
 }
 
-type FitnessRequest struct {
-	T any `json:"body"`
+type FitnessRequest[T any] struct {
+	Body T `json:"body" binding:"required"`
 }
 
 type FitnessResponse struct {
