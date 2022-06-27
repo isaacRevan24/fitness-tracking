@@ -24,9 +24,9 @@ type FitnessResponse struct {
 }
 
 type AddWeightRegisterReq struct {
-	Weight float32 `json:"weight" binding:"required"`
-	//CreatedAt time.Time `json:"createdAt" binding:"required"`
-	//ClientId  uuid.UUID `json:"clientId" binding:"required"`
+	Weight    float32   `json:"weight" binding:"required"`
+	CreatedAt string    `json:"createdAt" binding:"required"`
+	ClientId  uuid.UUID `json:"clientId" binding:"required"`
 }
 
 type AddWeightRegisterRes struct {
