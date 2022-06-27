@@ -1,7 +1,6 @@
 package router
 
 import (
-	"fmt"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -28,14 +27,13 @@ func (*routerRegister) TrackingRouter(router *gin.RouterGroup) {
 	router.POST("/weight", func(context *gin.Context) {
 		var request model.FitnessRequest[model.AddWeightRegisterReq]
 		parsingError := mapper.GenericRequestJsonMapper(&request, context)
-		fmt.Println(request)
 		if parsingError != nil {
 			var response model.FitnessStatusResponse
 			mapper.ToStatusResponse(&response, http.StatusBadRequest, "FIT-001", "Invalid request.")
 			context.JSON(response.Status.HttpStatus, response)
 			return
 		}
-		response := trackingHandler.AddWeightRegister()
+		response := trackingHandler.AddWeightRegister(request.Body)
 		context.JSON(response.Status.HttpStatus, response)
 	})
 }

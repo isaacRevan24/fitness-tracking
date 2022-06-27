@@ -1,6 +1,7 @@
 package handler
 
 import (
+	"fmt"
 	"net/http"
 
 	"github.com/google/uuid"
@@ -14,15 +15,16 @@ var (
 type trackingHandler struct{}
 
 type TrackingHandlerInterface interface {
-	AddWeightRegister() model.FitnessResponse
+	AddWeightRegister(request model.AddWeightRegisterReq) model.FitnessResponse
 }
 
 func NewTrackingHandler() TrackingHandlerInterface {
 	return &trackingHandler{}
 }
 
-func (*trackingHandler) AddWeightRegister() model.FitnessResponse {
+func (*trackingHandler) AddWeightRegister(request model.AddWeightRegisterReq) model.FitnessResponse {
 	var response model.FitnessResponse
+	fmt.Println(request)
 	responseStatus := mapper.ToBaseStatus(http.StatusOK, "fit-000", "all ok")
 	responseBody := model.AddWeightRegisterRes{WeightTrackId: uuid.UUID{}}
 	mapper.ToFitnessResponse(&response, &responseStatus, responseBody)

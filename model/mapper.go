@@ -33,8 +33,8 @@ func (*mapper) ToFitnessResponse(response *FitnessResponse, status *BaseStatus, 
 	*response = FitnessResponse{Status: *status, T: T}
 }
 
-func (*mapper) GenericRequestJsonMapper(request interface{}, context *gin.Context) error {
-	if err := context.ShouldBindJSON(request); err != nil {
+func (*mapper) GenericRequestJsonMapper(T any, context *gin.Context) error {
+	if err := context.ShouldBindJSON(T); err != nil {
 		return errors.New("missing argument")
 	}
 	return nil
