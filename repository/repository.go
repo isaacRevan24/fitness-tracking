@@ -46,10 +46,10 @@ func getConnection() (*repo, error) {
 func (r *repo) AddWeightRegister(request *model.AddWeightRegisterReq) (string, error) {
 	defer r.db.Close()
 	sqlStatement := `INSERT INTO weight_track(id, weight, created_at) VALUES($1, $2, $3) RETURNING weight_track_id`
-	id := uuid.NullUUID{}
+	id := uuid.UUID{}
 	insertError := r.db.QueryRow(sqlStatement, &request.ClientId, &request.Weight, &request.CreatedAt).Scan(id)
 	if insertError != nil {
 		return "", insertError
 	}
-	return id.UUID.String(), nil
+	return id.String(), nil
 }
