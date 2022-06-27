@@ -29,7 +29,7 @@ func (*routerRegister) TrackingRouter(router *gin.RouterGroup) {
 		parsingError := mapper.GenericRequestJsonMapper(&request, context)
 		if parsingError != nil {
 			var response model.FitnessStatusResponse
-			mapper.ToStatusResponse(&response, http.StatusBadRequest, "FIT-001", "Invalid request.")
+			mapper.ToStatusResponse(&response, http.StatusBadRequest, model.BAD_REQUEST_ERROR_STATUS, model.INVALID_REQUEST)
 			context.JSON(response.Status.HttpStatus, response)
 			return
 		}

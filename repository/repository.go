@@ -13,7 +13,7 @@ import (
 const (
 	host     = "localhost"
 	port     = 5432
-	user     = "root"
+	user     = "postgres"
 	password = "postgres"
 	dbname   = "fitness"
 )
@@ -23,7 +23,7 @@ type repo struct {
 }
 
 type TrackingRepository interface {
-	AddWeightRegister(request *model.AddWeightRegisterReq) (string, error)
+	AddWeightRegister(request model.AddWeightRegisterReq) (uuid.UUID, error)
 }
 
 func NewTrackingRepository() TrackingRepository {
@@ -32,24 +32,20 @@ func NewTrackingRepository() TrackingRepository {
 }
 
 func getConnection() (*repo, error) {
-
 	db, err := sql.Open("postgres", fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s sslmode=disable", host, port, user, password, dbname))
-
 	if err != nil {
 		log.Fatal("Failed to open a DB connection: ", err)
 		return nil, err
 	}
-
 	return &repo{db: db}, nil
 }
 
-func (r *repo) AddWeightRegister(request *model.AddWeightRegisterReq) (string, error) {
-	defer r.db.Close()
+func (r *repo) AddWeightRegister(request model.AddWeightRegisterReq) (uuid.UUID, error) {
 	sqlStatement := `INSERT INTO weight_track(id, weight, created_at) VALUES($1, $2, $3) RETURNING weight_track_id`
-	id := uuid.NullUUID{}
-	insertError := r.db.QueryRow(sqlStatement, &request.ClientId, &request.Weight, &request.CreatedAt).Scan(id)
+	id := uuid.UUID{}
+	insertError := r.db.QueryRow(sqlStatement, request.ClientId, request.Weight, request.CreatedAt).Scan(&id)
 	if insertError != nil {
-		return "", insertError
+		return uuid.UUID{}, insertError
 	}
-	return id.UUID.String(), nil
+	return id, nil
 }
