@@ -1,3 +1,4 @@
+//go:generate go run github.com/golang/mock/mockgen -source logic.go -destination ../test/mock/logic_mock.go -package mock
 package logic
 
 import (
