@@ -1,6 +1,7 @@
 package test
 
 import (
+	"errors"
 	"testing"
 
 	"github.com/golang/mock/gomock"
@@ -45,6 +46,21 @@ var _ = Describe("Logic tests", func() {
 		// Then
 		Expect(response).Should(Equal(id))
 		Expect(err).Should(BeNil())
+	})
+
+	It("Should fail to add weight register and return error", func() {
+		// Mock
+		mockRepository.EXPECT().AddWeightRegister(gomock.Any()).Return(uuid.Nil, errors.New("error"))
+
+		// Given
+		request := model.AddWeightRegisterReq{Weight: 100.01, CreatedAt: "2021-11-09T11:44:44.797", ClientId: uuid.UUID{}}
+
+		// When
+		response, err := underTest.AddWeightRegister(request)
+
+		// Then
+		Expect(response).Should(Equal(uuid.Nil))
+		Expect(err).Error()
 	})
 
 })
