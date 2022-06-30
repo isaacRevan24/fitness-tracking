@@ -8,12 +8,12 @@ import (
 	"github.com/google/uuid"
 	"github.com/isaacRevan24/fitness-tracking/logic"
 	"github.com/isaacRevan24/fitness-tracking/model"
-	"github.com/isaacRevan24/fitness-tracking/test/mock"
+	"github.com/isaacRevan24/fitness-tracking/repository/mock"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 )
 
-func TestController(t *testing.T) {
+func TestLogic(t *testing.T) {
 	RegisterFailHandler(Fail)
 	RunSpecs(t, "Logic Test suit")
 }

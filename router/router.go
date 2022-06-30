@@ -1,4 +1,4 @@
-//go:generate go run github.com/golang/mock/mockgen -source router.go -destination ../test/mock/router_mock.go -package mock
+//go:generate go run github.com/golang/mock/mockgen -source router.go -destination mock/router_mock.go -package mock
 package router
 
 import (

@@ -1,4 +1,4 @@
-//go:generate go run github.com/golang/mock/mockgen -source handler.go -destination ../test/mock/handler_mock.go -package mock
+//go:generate go run github.com/golang/mock/mockgen -source handler.go -destination mock/handler_mock.go -package mock
 package handler
 
 import (
@@ -10,8 +10,9 @@ import (
 )
 
 var (
-	trackingLogic logic.TrackingLogicInterface
-	mapper        model.FitnessMapper = model.NewFitnessMapper()
+	trackingRepository repository.TrackingRepository = repository.NewTrackingRepository()
+	trackingLogic      logic.TrackingLogicInterface  = logic.NewTrackingLogic(trackingRepository)
+	mapper             model.FitnessMapper           = model.NewFitnessMapper()
 )
 
 type trackingHandler struct{}
@@ -21,8 +22,6 @@ type TrackingHandlerInterface interface {
 }
 
 func NewTrackingHandler() TrackingHandlerInterface {
-	trackingRepository := repository.NewTrackingRepository()
-	trackingLogic = logic.NewTrackingLogic(trackingRepository)
 	return &trackingHandler{}
 }
 

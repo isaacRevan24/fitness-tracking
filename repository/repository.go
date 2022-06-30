@@ -1,4 +1,4 @@
-//go:generate go run github.com/golang/mock/mockgen -source repository.go -destination ../test/mock/repository_mock.go -package mock
+//go:generate go run github.com/golang/mock/mockgen -source repository.go -destination mock/repository_mock.go -package mock
 package repository
 
 import (
