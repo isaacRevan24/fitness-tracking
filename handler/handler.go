@@ -1,3 +1,4 @@
+//go:generate go run github.com/golang/mock/mockgen -source handler.go -destination ../test/mock/handler_mock.go -package mock
 package handler
 
 import (
