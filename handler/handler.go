@@ -28,11 +28,11 @@ func (handler trackingHandler) AddWeightRegister(request model.AddWeightRegister
 	id, error := Repo.AddWeightRegister(request)
 	if error != nil {
 		responseStatus := mapper.ToBaseStatus(http.StatusBadRequest, model.BAD_REQUEST_ERROR_STATUS, model.ADD_WEIGHT_REGISTER_ERROR)
-		mapper.ToFitnessResponse(&response, &responseStatus, nil)
+		mapper.ToFitnessResponse(&response, responseStatus, nil)
 		return response
 	}
 	responseStatus := mapper.ToBaseStatus(http.StatusOK, model.SUCCESS_CODE_STATUS, model.SUCCESS_MESSAGE)
 	responseBody := model.AddWeightRegisterRes{WeightTrackId: id}
-	mapper.ToFitnessResponse(&response, &responseStatus, responseBody)
+	mapper.ToFitnessResponse(&response, responseStatus, responseBody)
 	return response
 }

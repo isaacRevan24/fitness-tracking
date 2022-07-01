@@ -10,7 +10,7 @@ type mapper struct{}
 
 type FitnessMapper interface {
 	ToStatusResponse(response *FitnessStatusResponse, status int, code string, message string)
-	ToFitnessResponse(response *FitnessResponse, status *BaseStatus, T any)
+	ToFitnessResponse(response *FitnessResponse, status BaseStatus, T any)
 	ToBaseStatus(status int, code string, message string) BaseStatus
 	GenericRequestJsonMapper(T any, context *gin.Context) error
 }
@@ -29,8 +29,8 @@ func (mapper) ToStatusResponse(response *FitnessStatusResponse, status int, code
 	*response = statusResponse
 }
 
-func (mapper) ToFitnessResponse(response *FitnessResponse, status *BaseStatus, T any) {
-	*response = FitnessResponse{Status: *status, T: T}
+func (mapper) ToFitnessResponse(response *FitnessResponse, status BaseStatus, T any) {
+	*response = FitnessResponse{Status: status, T: T}
 }
 
 func (mapper) GenericRequestJsonMapper(T any, context *gin.Context) error {
