@@ -20,10 +20,10 @@ type TrackingHandlerInterface interface {
 }
 
 func NewTrackingHandler() TrackingHandlerInterface {
-	return &trackingHandler{}
+	return trackingHandler{}
 }
 
-func (handler *trackingHandler) AddWeightRegister(request model.AddWeightRegisterReq) model.FitnessResponse {
+func (handler trackingHandler) AddWeightRegister(request model.AddWeightRegisterReq) model.FitnessResponse {
 	var response model.FitnessResponse
 	id, error := Repo.AddWeightRegister(request)
 	if error != nil {
