@@ -10,6 +10,7 @@ const (
 	SUCCESS_MESSAGE           = "Success."
 	DATA_BASE_ERROR           = "Unable to connect to database."
 	ADD_WEIGHT_REGISTER_ERROR = "Unable to save weight register."
+	Get_WEIGHT_REGISTER_ERROR = "Unable to get weight register."
 	INVALID_REQUEST           = "Invalid request parameters."
 )
 
