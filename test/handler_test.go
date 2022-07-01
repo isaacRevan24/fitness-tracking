@@ -6,7 +6,7 @@ import (
 
 	"github.com/golang/mock/gomock"
 	"github.com/google/uuid"
-	"github.com/isaacRevan24/fitness-tracking/logic"
+	"github.com/isaacRevan24/fitness-tracking/handler"
 	"github.com/isaacRevan24/fitness-tracking/model"
 	"github.com/isaacRevan24/fitness-tracking/repository/mock"
 	. "github.com/onsi/ginkgo"
@@ -15,21 +15,21 @@ import (
 
 func TestLogic(t *testing.T) {
 	RegisterFailHandler(Fail)
-	RunSpecs(t, "Logic Test suit")
+	RunSpecs(t, "Handler Test suit")
 }
 
-var _ = Describe("Logic tests", func() {
+var _ = Describe("Handler tests", func() {
 
 	var (
 		mockCtrl       *gomock.Controller
 		mockRepository *mock.MockTrackingRepository
-		underTest      logic.TrackingLogicInterface
+		underTest      handler.TrackingHandlerInterface
 	)
 
 	BeforeEach(func() {
 		mockCtrl = gomock.NewController(GinkgoT())
 		mockRepository = mock.NewMockTrackingRepository(mockCtrl)
-		underTest = logic.NewTrackingLogic(mockRepository)
+		underTest = handler.NewTrackingHandler(mockRepository)
 	})
 
 	It("Should save weight entry and return client Id", func() {
@@ -41,11 +41,11 @@ var _ = Describe("Logic tests", func() {
 		request := model.AddWeightRegisterReq{Weight: 100.01, CreatedAt: "2021-11-09T11:44:44.797", ClientId: uuid.UUID{}}
 
 		// When
-		response, err := underTest.AddWeightRegister(request)
+		response := underTest.AddWeightRegister(request)
 
 		// Then
-		Expect(response).Should(Equal(id))
-		Expect(err).Should(BeNil())
+		Expect(response.Status.Code).Should(Equal(model.SUCCESS_CODE_STATUS))
+		Expect(response.T).ShouldNot(BeNil())
 	})
 
 	It("Should fail to add weight register and return error", func() {
@@ -56,11 +56,11 @@ var _ = Describe("Logic tests", func() {
 		request := model.AddWeightRegisterReq{Weight: 100.01, CreatedAt: "2021-11-09T11:44:44.797", ClientId: uuid.UUID{}}
 
 		// When
-		response, err := underTest.AddWeightRegister(request)
+		response := underTest.AddWeightRegister(request)
 
 		// Then
-		Expect(response).Should(Equal(uuid.Nil))
-		Expect(err).Error()
+		Expect(response.Status.Code).Should(Equal(model.BAD_REQUEST_ERROR_STATUS))
+		Expect(response.T).Should(BeNil())
 	})
 
 })

@@ -7,11 +7,11 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/isaacRevan24/fitness-tracking/handler"
 	"github.com/isaacRevan24/fitness-tracking/model"
+	"github.com/isaacRevan24/fitness-tracking/repository"
 )
 
 var (
-	trackingHandler handler.TrackingHandlerInterface = handler.NewTrackingHandler()
-	mapper          model.FitnessMapper              = model.NewFitnessMapper()
+	mapper model.FitnessMapper = model.NewFitnessMapper()
 )
 
 type routerRegister struct{}
@@ -34,6 +34,7 @@ func (*routerRegister) TrackingRouter(router *gin.RouterGroup) {
 			context.JSON(response.Status.HttpStatus, response)
 			return
 		}
+		trackingHandler := handler.NewTrackingHandler(repository.NewTrackingRepository())
 		response := trackingHandler.AddWeightRegister(request.Body)
 		context.JSON(response.Status.HttpStatus, response)
 	})

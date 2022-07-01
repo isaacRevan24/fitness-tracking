@@ -4,30 +4,29 @@ package handler
 import (
 	"net/http"
 
-	"github.com/isaacRevan24/fitness-tracking/logic"
 	"github.com/isaacRevan24/fitness-tracking/model"
 	"github.com/isaacRevan24/fitness-tracking/repository"
 )
 
 var (
-	trackingRepository repository.TrackingRepository = repository.NewTrackingRepository()
-	trackingLogic      logic.TrackingLogicInterface  = logic.NewTrackingLogic(trackingRepository)
-	mapper             model.FitnessMapper           = model.NewFitnessMapper()
+	mapper model.FitnessMapper = model.NewFitnessMapper()
 )
 
-type trackingHandler struct{}
+type trackingHandler struct {
+	Repo repository.TrackingRepository
+}
 
 type TrackingHandlerInterface interface {
 	AddWeightRegister(request model.AddWeightRegisterReq) model.FitnessResponse
 }
 
-func NewTrackingHandler() TrackingHandlerInterface {
-	return &trackingHandler{}
+func NewTrackingHandler(repo repository.TrackingRepository) TrackingHandlerInterface {
+	return &trackingHandler{Repo: repo}
 }
 
-func (*trackingHandler) AddWeightRegister(request model.AddWeightRegisterReq) model.FitnessResponse {
+func (handler *trackingHandler) AddWeightRegister(request model.AddWeightRegisterReq) model.FitnessResponse {
 	var response model.FitnessResponse
-	id, error := trackingLogic.AddWeightRegister(request)
+	id, error := handler.Repo.AddWeightRegister(request)
 	if error != nil {
 		responseStatus := mapper.ToBaseStatus(http.StatusBadRequest, model.BAD_REQUEST_ERROR_STATUS, model.ADD_WEIGHT_REGISTER_ERROR)
 		mapper.ToFitnessResponse(&response, &responseStatus, nil)
