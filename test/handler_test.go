@@ -29,7 +29,8 @@ var _ = Describe("Handler tests", func() {
 	BeforeEach(func() {
 		mockCtrl = gomock.NewController(GinkgoT())
 		mockRepository = mock.NewMockTrackingRepository(mockCtrl)
-		underTest = handler.NewTrackingHandler(mockRepository)
+		underTest = handler.NewTrackingHandler()
+		handler.Repo = mockRepository
 	})
 
 	It("Should save weight entry and return client Id", func() {

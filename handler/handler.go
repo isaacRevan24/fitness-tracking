@@ -9,24 +9,23 @@ import (
 )
 
 var (
-	mapper model.FitnessMapper = model.NewFitnessMapper()
+	Repo   repository.TrackingRepository = repository.NewTrackingRepository()
+	mapper model.FitnessMapper           = model.NewFitnessMapper()
 )
 
-type trackingHandler struct {
-	Repo repository.TrackingRepository
-}
+type trackingHandler struct{}
 
 type TrackingHandlerInterface interface {
 	AddWeightRegister(request model.AddWeightRegisterReq) model.FitnessResponse
 }
 
-func NewTrackingHandler(repo repository.TrackingRepository) TrackingHandlerInterface {
-	return &trackingHandler{Repo: repo}
+func NewTrackingHandler() TrackingHandlerInterface {
+	return &trackingHandler{}
 }
 
 func (handler *trackingHandler) AddWeightRegister(request model.AddWeightRegisterReq) model.FitnessResponse {
 	var response model.FitnessResponse
-	id, error := handler.Repo.AddWeightRegister(request)
+	id, error := Repo.AddWeightRegister(request)
 	if error != nil {
 		responseStatus := mapper.ToBaseStatus(http.StatusBadRequest, model.BAD_REQUEST_ERROR_STATUS, model.ADD_WEIGHT_REGISTER_ERROR)
 		mapper.ToFitnessResponse(&response, &responseStatus, nil)
