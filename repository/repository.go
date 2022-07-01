@@ -47,7 +47,6 @@ func (r *Repo) AddWeightRegister(request model.AddWeightRegisterReq) (string, er
 	sqlStatement := `INSERT INTO weight_track(weight_id, id, weight, created_at) VALUES($1, $2, $3, $4)`
 	id := uuid.New().String()
 	_, insertError := r.db.Exec(sqlStatement, id, request.ClientId, request.Weight, request.CreatedAt)
-	fmt.Println(insertError)
 	if insertError != nil {
 		return "", insertError
 	}
