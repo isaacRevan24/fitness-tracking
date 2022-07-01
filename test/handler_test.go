@@ -5,7 +5,6 @@ import (
 	"testing"
 
 	"github.com/golang/mock/gomock"
-	"github.com/google/uuid"
 	"github.com/isaacRevan24/fitness-tracking/handler"
 	"github.com/isaacRevan24/fitness-tracking/model"
 	"github.com/isaacRevan24/fitness-tracking/repository/mock"
@@ -35,11 +34,10 @@ var _ = Describe("Handler tests", func() {
 
 	It("Should save weight entry and return client Id", func() {
 		// Mock
-		id := uuid.New()
-		mockRepository.EXPECT().AddWeightRegister(gomock.Any()).Return(id, nil)
+		mockRepository.EXPECT().AddWeightRegister(gomock.Any()).Return("eca98147-8a83-4df0-8812-0668c67b2865", nil)
 
 		// Given
-		request := model.AddWeightRegisterReq{Weight: 100.01, CreatedAt: "2021-11-09T11:44:44.797", ClientId: uuid.UUID{}}
+		request := model.AddWeightRegisterReq{Weight: 100.01, CreatedAt: "2021-11-09T11:44:44.797", ClientId: "eca98147-8a83-4df0-8812-0668c67b2865"}
 
 		// When
 		response := underTest.AddWeightRegister(request)
@@ -51,10 +49,10 @@ var _ = Describe("Handler tests", func() {
 
 	It("Should fail to add weight register and return error", func() {
 		// Mock
-		mockRepository.EXPECT().AddWeightRegister(gomock.Any()).Return(uuid.Nil, errors.New("error"))
+		mockRepository.EXPECT().AddWeightRegister(gomock.Any()).Return("", errors.New("error"))
 
 		// Given
-		request := model.AddWeightRegisterReq{Weight: 100.01, CreatedAt: "2021-11-09T11:44:44.797", ClientId: uuid.UUID{}}
+		request := model.AddWeightRegisterReq{Weight: 100.01, CreatedAt: "2021-11-09T11:44:44.797", ClientId: "eca98147-8a83-4df0-8812-0668c67b2865"}
 
 		// When
 		response := underTest.AddWeightRegister(request)

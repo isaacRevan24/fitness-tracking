@@ -8,7 +8,6 @@ import (
 	reflect "reflect"
 
 	gomock "github.com/golang/mock/gomock"
-	uuid "github.com/google/uuid"
 	model "github.com/isaacRevan24/fitness-tracking/model"
 )
 
@@ -36,10 +35,10 @@ func (m *MockTrackingRepository) EXPECT() *MockTrackingRepositoryMockRecorder {
 }
 
 // AddWeightRegister mocks base method.
-func (m *MockTrackingRepository) AddWeightRegister(request model.AddWeightRegisterReq) (uuid.UUID, error) {
+func (m *MockTrackingRepository) AddWeightRegister(request model.AddWeightRegisterReq) (string, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "AddWeightRegister", request)
-	ret0, _ := ret[0].(uuid.UUID)
+	ret0, _ := ret[0].(string)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
