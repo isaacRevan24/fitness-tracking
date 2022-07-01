@@ -1,9 +1,5 @@
 package model
 
-import (
-	"github.com/google/uuid"
-)
-
 const (
 	SUCCESS_CODE_STATUS          = "FIT-00"
 	INTERNAL_SERVER_ERROR_STATUS = "FIT-01"
@@ -47,8 +43,8 @@ type AddWeightRegisterRes struct {
 }
 
 type GetWeightRegisterReq struct {
-	ClientId      uuid.UUID `json:"clientId" binding:"required"`
-	WeightTrackId uuid.UUID `json:"weightTrackId" binding:"required"`
+	ClientId      string `json:"clientId" binding:"required"`
+	WeightTrackId string `json:"weightTrackId" binding:"required"`
 }
 
 type GetWeightRegisterRes struct {
