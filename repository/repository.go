@@ -1,4 +1,4 @@
-//go:generate go run github.com/golang/mock/mockgen -source repository.go -destination ../test/mock/repository_mock.go -package mock
+//go:generate go run github.com/golang/mock/mockgen -source repository.go -destination mock/repository_mock.go -package mock
 package repository
 
 import (
@@ -19,7 +19,7 @@ const (
 	dbname   = "fitness"
 )
 
-type repo struct {
+type Repo struct {
 	db *sql.DB
 }
 
@@ -32,16 +32,16 @@ func NewTrackingRepository() TrackingRepository {
 	return repo
 }
 
-func getConnection() (*repo, error) {
+func getConnection() (*Repo, error) {
 	db, err := sql.Open("postgres", fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s sslmode=disable", host, port, user, password, dbname))
 	if err != nil {
 		log.Fatal("Failed to open a DB connection: ", err)
 		return nil, err
 	}
-	return &repo{db: db}, nil
+	return &Repo{db: db}, nil
 }
 
-func (r *repo) AddWeightRegister(request model.AddWeightRegisterReq) (uuid.UUID, error) {
+func (r *Repo) AddWeightRegister(request model.AddWeightRegisterReq) (uuid.UUID, error) {
 	sqlStatement := `INSERT INTO weight_track(id, weight, created_at) VALUES($1, $2, $3) RETURNING weight_track_id`
 	id := uuid.UUID{}
 	insertError := r.db.QueryRow(sqlStatement, request.ClientId, request.Weight, request.CreatedAt).Scan(&id)

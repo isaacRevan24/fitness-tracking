@@ -1,4 +1,4 @@
-//go:generate go run github.com/golang/mock/mockgen -source router.go -destination ../test/mock/router_mock.go -package mock
+//go:generate go run github.com/golang/mock/mockgen -source router.go -destination mock/router_mock.go -package mock
 package router
 
 import (
@@ -10,8 +10,7 @@ import (
 )
 
 var (
-	trackingHandler handler.TrackingHandlerInterface = handler.NewTrackingHandler()
-	mapper          model.FitnessMapper              = model.NewFitnessMapper()
+	mapper model.FitnessMapper = model.NewFitnessMapper()
 )
 
 type routerRegister struct{}
@@ -34,6 +33,7 @@ func (*routerRegister) TrackingRouter(router *gin.RouterGroup) {
 			context.JSON(response.Status.HttpStatus, response)
 			return
 		}
+		trackingHandler := handler.NewTrackingHandler()
 		response := trackingHandler.AddWeightRegister(request.Body)
 		context.JSON(response.Status.HttpStatus, response)
 	})
