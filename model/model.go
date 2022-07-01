@@ -45,3 +45,13 @@ type AddWeightRegisterReq struct {
 type AddWeightRegisterRes struct {
 	WeightTrackId uuid.UUID `json:"weightTrackId"`
 }
+
+type GetWeightRegisterReq struct {
+	ClientId      uuid.UUID `json:"clientId" binding:"required"`
+	WeightTrackId uuid.UUID `json:"weightTrackId" binding:"required"`
+}
+
+type GetWeightRegisterRes struct {
+	Weight    float32 `json:"weight"`
+	CreatedAt string  `json:"createdAt"`
+}
