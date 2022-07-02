@@ -8,7 +8,6 @@ import (
 	reflect "reflect"
 
 	gomock "github.com/golang/mock/gomock"
-	uuid "github.com/google/uuid"
 	model "github.com/isaacRevan24/fitness-tracking/model"
 )
 
@@ -36,10 +35,10 @@ func (m *MockTrackingRepository) EXPECT() *MockTrackingRepositoryMockRecorder {
 }
 
 // AddWeightRegister mocks base method.
-func (m *MockTrackingRepository) AddWeightRegister(request model.AddWeightRegisterReq) (uuid.UUID, error) {
+func (m *MockTrackingRepository) AddWeightRegister(request model.AddWeightRegisterReq) (string, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "AddWeightRegister", request)
-	ret0, _ := ret[0].(uuid.UUID)
+	ret0, _ := ret[0].(string)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -48,4 +47,19 @@ func (m *MockTrackingRepository) AddWeightRegister(request model.AddWeightRegist
 func (mr *MockTrackingRepositoryMockRecorder) AddWeightRegister(request interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "AddWeightRegister", reflect.TypeOf((*MockTrackingRepository)(nil).AddWeightRegister), request)
+}
+
+// GetWeightRegister mocks base method.
+func (m *MockTrackingRepository) GetWeightRegister(clientId, weightId string) (model.GetWeightRegisterRes, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetWeightRegister", clientId, weightId)
+	ret0, _ := ret[0].(model.GetWeightRegisterRes)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetWeightRegister indicates an expected call of GetWeightRegister.
+func (mr *MockTrackingRepositoryMockRecorder) GetWeightRegister(clientId, weightId interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetWeightRegister", reflect.TypeOf((*MockTrackingRepository)(nil).GetWeightRegister), clientId, weightId)
 }

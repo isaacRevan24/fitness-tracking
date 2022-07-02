@@ -1,9 +1,5 @@
 package model
 
-import (
-	"github.com/google/uuid"
-)
-
 const (
 	SUCCESS_CODE_STATUS          = "FIT-00"
 	INTERNAL_SERVER_ERROR_STATUS = "FIT-01"
@@ -14,6 +10,7 @@ const (
 	SUCCESS_MESSAGE           = "Success."
 	DATA_BASE_ERROR           = "Unable to connect to database."
 	ADD_WEIGHT_REGISTER_ERROR = "Unable to save weight register."
+	Get_WEIGHT_REGISTER_ERROR = "Unable to get weight register."
 	INVALID_REQUEST           = "Invalid request parameters."
 )
 
@@ -37,11 +34,16 @@ type FitnessResponse struct {
 }
 
 type AddWeightRegisterReq struct {
-	Weight    float32   `json:"weight" binding:"required"`
-	CreatedAt string    `json:"createdAt" binding:"required"`
-	ClientId  uuid.UUID `json:"clientId" binding:"required"`
+	Weight    float32 `json:"weight" binding:"required"`
+	CreatedAt string  `json:"createdAt" binding:"required"`
+	ClientId  string  `json:"clientId" binding:"required"`
 }
 
 type AddWeightRegisterRes struct {
-	WeightTrackId uuid.UUID `json:"weightTrackId"`
+	WeightTrackId string `json:"weightTrackId"`
+}
+
+type GetWeightRegisterRes struct {
+	Weight    float32 `json:"weight"`
+	CreatedAt string  `json:"createdAt"`
 }
