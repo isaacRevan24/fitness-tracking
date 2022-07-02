@@ -42,7 +42,7 @@ func (handler trackingHandler) GetWeightRegister(clientId string, weightId strin
 	var response model.FitnessResponse
 	register, error := Repo.GetWeightRegister(clientId, weightId)
 	if error != nil {
-		responseStatus := mapper.ToBaseStatus(http.StatusBadRequest, model.BAD_REQUEST_ERROR_STATUS, model.Get_WEIGHT_REGISTER_ERROR)
+		responseStatus := mapper.ToBaseStatus(http.StatusBadRequest, model.BAD_REQUEST_ERROR_STATUS, model.GET_WEIGHT_REGISTER_ERROR)
 		mapper.ToFitnessResponse(&response, responseStatus, nil)
 		return response
 	}
