@@ -17,6 +17,7 @@ type trackingHandler struct{}
 
 type TrackingHandlerInterface interface {
 	AddWeightRegister(request model.AddWeightRegisterReq) model.FitnessResponse
+	GetWeightRegister(clientId string, weightId string) model.FitnessResponse
 }
 
 func NewTrackingHandler() TrackingHandlerInterface {
@@ -37,9 +38,9 @@ func (handler trackingHandler) AddWeightRegister(request model.AddWeightRegister
 	return response
 }
 
-func (handler trackingHandler) GetWeightRegister(request model.GetWeightRegisterReq) model.FitnessResponse {
+func (handler trackingHandler) GetWeightRegister(clientId string, weightId string) model.FitnessResponse {
 	var response model.FitnessResponse
-	register, error := Repo.GetWeightRegister(request)
+	register, error := Repo.GetWeightRegister(clientId, weightId)
 	if error != nil {
 		responseStatus := mapper.ToBaseStatus(http.StatusBadRequest, model.BAD_REQUEST_ERROR_STATUS, model.Get_WEIGHT_REGISTER_ERROR)
 		mapper.ToFitnessResponse(&response, responseStatus, nil)

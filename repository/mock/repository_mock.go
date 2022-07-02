@@ -50,16 +50,16 @@ func (mr *MockTrackingRepositoryMockRecorder) AddWeightRegister(request interfac
 }
 
 // GetWeightRegister mocks base method.
-func (m *MockTrackingRepository) GetWeightRegister(request model.GetWeightRegisterReq) (model.GetWeightRegisterRes, error) {
+func (m *MockTrackingRepository) GetWeightRegister(clientId, weightId string) (model.GetWeightRegisterRes, error) {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "GetWeightRegister", request)
+	ret := m.ctrl.Call(m, "GetWeightRegister", clientId, weightId)
 	ret0, _ := ret[0].(model.GetWeightRegisterRes)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
 
 // GetWeightRegister indicates an expected call of GetWeightRegister.
-func (mr *MockTrackingRepositoryMockRecorder) GetWeightRegister(request interface{}) *gomock.Call {
+func (mr *MockTrackingRepositoryMockRecorder) GetWeightRegister(clientId, weightId interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetWeightRegister", reflect.TypeOf((*MockTrackingRepository)(nil).GetWeightRegister), request)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetWeightRegister", reflect.TypeOf((*MockTrackingRepository)(nil).GetWeightRegister), clientId, weightId)
 }

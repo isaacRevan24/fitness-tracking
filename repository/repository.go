@@ -26,7 +26,7 @@ type Repo struct {
 
 type TrackingRepository interface {
 	AddWeightRegister(request model.AddWeightRegisterReq) (string, error)
-	GetWeightRegister(request model.GetWeightRegisterReq) (model.GetWeightRegisterRes, error)
+	GetWeightRegister(clientId string, weightId string) (model.GetWeightRegisterRes, error)
 }
 
 func NewTrackingRepository() TrackingRepository {
@@ -54,11 +54,11 @@ func (r *Repo) AddWeightRegister(request model.AddWeightRegisterReq) (string, er
 	return id, nil
 }
 
-func (r *Repo) GetWeightRegister(request model.GetWeightRegisterReq) (model.GetWeightRegisterRes, error) {
+func (r *Repo) GetWeightRegister(clientId string, weightId string) (model.GetWeightRegisterRes, error) {
 	sqlStatement := `SELECT created_at, weight FROM weight_track WHERE id=$1 AND weight_id=$2`
 	var created_at time.Time
 	var weight float32
-	error := r.db.QueryRow(sqlStatement, request.ClientId, request.WeightTrackId).Scan(&created_at, &weight)
+	error := r.db.QueryRow(sqlStatement, clientId, weightId).Scan(&created_at, &weight)
 	if error != nil {
 		fmt.Println(error)
 		return model.GetWeightRegisterRes{}, error
