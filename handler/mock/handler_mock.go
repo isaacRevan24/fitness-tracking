@@ -61,3 +61,17 @@ func (mr *MockTrackingHandlerInterfaceMockRecorder) GetWeightRegister(clientId, 
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetWeightRegister", reflect.TypeOf((*MockTrackingHandlerInterface)(nil).GetWeightRegister), clientId, weightId)
 }
+
+// UpdateWeightRegister mocks base method.
+func (m *MockTrackingHandlerInterface) UpdateWeightRegister(request model.UpdateWeightRegisterReq) model.FitnessResponse {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "UpdateWeightRegister", request)
+	ret0, _ := ret[0].(model.FitnessResponse)
+	return ret0
+}
+
+// UpdateWeightRegister indicates an expected call of UpdateWeightRegister.
+func (mr *MockTrackingHandlerInterfaceMockRecorder) UpdateWeightRegister(request interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateWeightRegister", reflect.TypeOf((*MockTrackingHandlerInterface)(nil).UpdateWeightRegister), request)
+}

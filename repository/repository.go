@@ -3,6 +3,7 @@ package repository
 
 import (
 	"database/sql"
+	"errors"
 	"fmt"
 	"log"
 	"time"
@@ -27,6 +28,7 @@ type Repo struct {
 type TrackingRepository interface {
 	AddWeightRegister(request model.AddWeightRegisterReq) (string, error)
 	GetWeightRegister(clientId string, weightId string) (model.GetWeightRegisterRes, error)
+	UpdateWeightRegister(request model.UpdateWeightRegisterReq) error
 }
 
 func NewTrackingRepository() TrackingRepository {
@@ -64,4 +66,25 @@ func (r *Repo) GetWeightRegister(clientId string, weightId string) (model.GetWei
 		return model.GetWeightRegisterRes{}, error
 	}
 	return model.GetWeightRegisterRes{Weight: weight, CreatedAt: created_at.String()}, nil
+}
+
+func (r *Repo) UpdateWeightRegister(request model.UpdateWeightRegisterReq) error {
+	sqlStatement := `UPDATE weight_track SET weight=$1 WHERE weight_id=$2 AND id=$3`
+	res, error := r.db.Exec(sqlStatement, request.Weight, request.WeightTrackId, request.ClientId)
+	if error != nil {
+		fmt.Println(error)
+		return error
+	}
+	count, rowError := res.RowsAffected()
+	if rowError != nil {
+		fmt.Println(rowError)
+		return rowError
+	}
+
+	if count < 1 {
+		fmt.Println("Registros no afectado")
+		return errors.New("row no afectado")
+	}
+	fmt.Println(count)
+	return nil
 }
