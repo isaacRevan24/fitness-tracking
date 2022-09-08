@@ -7,11 +7,12 @@ const (
 )
 
 const (
-	SUCCESS_MESSAGE           = "Success."
-	DATA_BASE_ERROR           = "Unable to connect to database."
-	ADD_WEIGHT_REGISTER_ERROR = "Unable to save weight register."
-	GET_WEIGHT_REGISTER_ERROR = "Unable to get weight register."
-	INVALID_REQUEST           = "Invalid request parameters."
+	SUCCESS_MESSAGE              = "Success."
+	DATA_BASE_ERROR              = "Unable to connect to database."
+	ADD_WEIGHT_REGISTER_ERROR    = "Unable to save weight register."
+	GET_WEIGHT_REGISTER_ERROR    = "Unable to get weight register."
+	INVALID_REQUEST              = "Invalid request parameters."
+	UPDATE_WEIGHT_REGISTER_ERROR = "Unable to update weight register."
 )
 
 type BaseStatus struct {
@@ -46,4 +47,10 @@ type AddWeightRegisterRes struct {
 type GetWeightRegisterRes struct {
 	Weight    float32 `json:"weight"`
 	CreatedAt string  `json:"createdAt"`
+}
+
+type UpdateWeightRegisterReq struct {
+	ClientId      string  `json:"clientId" binding:"required"`
+	WeightTrackId string  `json:"weightTrackId" binding:"required"`
+	Weight        float32 `json:"weight" binding:"required"`
 }
