@@ -48,6 +48,20 @@ func (mr *MockTrackingHandlerInterfaceMockRecorder) AddWeightRegister(request in
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "AddWeightRegister", reflect.TypeOf((*MockTrackingHandlerInterface)(nil).AddWeightRegister), request)
 }
 
+// DeleteWeightRegister mocks base method.
+func (m *MockTrackingHandlerInterface) DeleteWeightRegister(request model.DeleteWeightRegisterReq) model.FitnessResponse {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "DeleteWeightRegister", request)
+	ret0, _ := ret[0].(model.FitnessResponse)
+	return ret0
+}
+
+// DeleteWeightRegister indicates an expected call of DeleteWeightRegister.
+func (mr *MockTrackingHandlerInterfaceMockRecorder) DeleteWeightRegister(request interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "DeleteWeightRegister", reflect.TypeOf((*MockTrackingHandlerInterface)(nil).DeleteWeightRegister), request)
+}
+
 // GetWeightRegister mocks base method.
 func (m *MockTrackingHandlerInterface) GetWeightRegister(clientId, weightId string) model.FitnessResponse {
 	m.ctrl.T.Helper()

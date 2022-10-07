@@ -13,6 +13,7 @@ const (
 	GET_WEIGHT_REGISTER_ERROR    = "Unable to get weight register."
 	INVALID_REQUEST              = "Invalid request parameters."
 	UPDATE_WEIGHT_REGISTER_ERROR = "Unable to update weight register."
+	DELETE_WEIGHT_REGISTER_ERROR = "Unable to delete weight register."
 )
 
 type BaseStatus struct {
@@ -53,4 +54,9 @@ type UpdateWeightRegisterReq struct {
 	ClientId      string  `json:"clientId" binding:"required"`
 	WeightTrackId string  `json:"weightTrackId" binding:"required"`
 	Weight        float32 `json:"weight" binding:"required"`
+}
+
+type DeleteWeightRegisterReq struct {
+	WeightTrackId string `json:"weightTrackId" binding:"required"`
+	ClientId      string `json:"clientId" binding:"required"`
 }

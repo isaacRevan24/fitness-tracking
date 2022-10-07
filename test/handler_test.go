@@ -104,4 +104,72 @@ var _ = Describe("Handler tests", func() {
 
 	})
 
+	Context("Update weight entry", func() {
+		It("Should successfully update weight entry", func() {
+			// Mock
+			mockRepository.EXPECT().UpdateWeightRegister(gomock.Any()).Return(nil)
+
+			// Given
+			request := model.UpdateWeightRegisterReq{ClientId: "c209cac7-6901-42a1-8e3f-632aecd9911d", WeightTrackId: "24793e94-eb3c-4580-a6df-ebc09c6eca84", Weight: 99.9}
+
+			// When
+			response := underTest.UpdateWeightRegister(request)
+
+			// Then
+			Expect(response.Status.Code).Should(Equal(model.SUCCESS_CODE_STATUS))
+			Expect(response.Status.Message).Should(Equal(model.SUCCESS_MESSAGE))
+			Expect(response.T).Should(BeNil())
+		})
+
+		It("Should fail to delete wieght entry", func() {
+			// Mock
+			mockRepository.EXPECT().UpdateWeightRegister(gomock.Any()).Return(errors.New("error"))
+
+			// Given
+			request := model.UpdateWeightRegisterReq{ClientId: "c209cac7-6901-42a1-8e3f-632aecd9911d", WeightTrackId: "24793e94-eb3c-4580-a6df-ebc09c6eca84", Weight: 99.9}
+
+			// When
+			response := underTest.UpdateWeightRegister(request)
+
+			// Then
+			Expect(response.Status.Code).Should(Equal(model.BAD_REQUEST_ERROR_STATUS))
+			Expect(response.Status.Message).Should(Equal(model.UPDATE_WEIGHT_REGISTER_ERROR))
+			Expect(response.T).Should(BeNil())
+		})
+
+	})
+
+	Context("Delete weight entry", func() {
+		It("Should delete successfully weight entry", func() {
+			// Mock
+			mockRepository.EXPECT().DeleteWeightRegister(gomock.Any()).Return(nil)
+
+			// Given
+			request := model.DeleteWeightRegisterReq{WeightTrackId: "4793e94-eb3c-4580-a6df-ebc09c6eca84", ClientId: "c209cac7-6901-42a1-8e3f-632aecd9911d"}
+
+			// When
+			response := underTest.DeleteWeightRegister(request)
+
+			// Then
+			Expect(response.Status.Code).Should(Equal(model.SUCCESS_CODE_STATUS))
+			Expect(response.Status.Message).Should(Equal(model.SUCCESS_MESSAGE))
+			Expect(response.T).Should(BeNil())
+		})
+
+		It("Should fail tu delete weight entry", func() {
+			// Mock
+			mockRepository.EXPECT().DeleteWeightRegister(gomock.Any()).Return(errors.New("error"))
+
+			// Given
+			request := model.DeleteWeightRegisterReq{WeightTrackId: "4793e94-eb3c-4580-a6df-ebc09c6eca84", ClientId: "c209cac7-6901-42a1-8e3f-632aecd9911d"}
+
+			// When
+			response := underTest.DeleteWeightRegister(request)
+
+			// Then
+			Expect(response.Status.Code).Should(Equal(model.BAD_REQUEST_ERROR_STATUS))
+			Expect(response.Status.Message).Should(Equal(model.DELETE_WEIGHT_REGISTER_ERROR))
+			Expect(response.T).Should(BeNil())
+		})
+	})
 })

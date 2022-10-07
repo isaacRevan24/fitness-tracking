@@ -29,6 +29,7 @@ type TrackingRepository interface {
 	AddWeightRegister(request model.AddWeightRegisterReq) (string, error)
 	GetWeightRegister(clientId string, weightId string) (model.GetWeightRegisterRes, error)
 	UpdateWeightRegister(request model.UpdateWeightRegisterReq) error
+	DeleteWeightRegister(request model.DeleteWeightRegisterReq) error
 }
 
 func NewTrackingRepository() TrackingRepository {
@@ -86,5 +87,25 @@ func (r *Repo) UpdateWeightRegister(request model.UpdateWeightRegisterReq) error
 		return errors.New("row no afectado")
 	}
 	fmt.Println(count)
+	return nil
+}
+
+func (r *Repo) DeleteWeightRegister(request model.DeleteWeightRegisterReq) error {
+	sqlStatement := `DELETE FROM weight_track WHERE weight_id=$1 AND id=$2`
+	res, error := r.db.Exec(sqlStatement, request.WeightTrackId, request.ClientId)
+	if error != nil {
+		fmt.Println(error)
+		return error
+	}
+	count, rowError := res.RowsAffected()
+	if rowError != nil {
+		fmt.Println(rowError)
+		return rowError
+	}
+
+	if count < 1 {
+		fmt.Println("Registros no afectado")
+		return errors.New("row no afectado")
+	}
 	return nil
 }

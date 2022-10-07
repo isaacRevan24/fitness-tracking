@@ -19,6 +19,7 @@ type TrackingHandlerInterface interface {
 	AddWeightRegister(request model.AddWeightRegisterReq) model.FitnessResponse
 	GetWeightRegister(clientId string, weightId string) model.FitnessResponse
 	UpdateWeightRegister(request model.UpdateWeightRegisterReq) model.FitnessResponse
+	DeleteWeightRegister(request model.DeleteWeightRegisterReq) model.FitnessResponse
 }
 
 func NewTrackingHandler() TrackingHandlerInterface {
@@ -57,6 +58,19 @@ func (handler trackingHandler) UpdateWeightRegister(request model.UpdateWeightRe
 	error := Repo.UpdateWeightRegister(request)
 	if error != nil {
 		responseStatus := mapper.ToBaseStatus(http.StatusBadRequest, model.BAD_REQUEST_ERROR_STATUS, model.UPDATE_WEIGHT_REGISTER_ERROR)
+		mapper.ToFitnessResponse(&response, responseStatus, nil)
+		return response
+	}
+	responseStatus := mapper.ToBaseStatus(http.StatusOK, model.SUCCESS_CODE_STATUS, model.SUCCESS_MESSAGE)
+	mapper.ToFitnessResponse(&response, responseStatus, nil)
+	return response
+}
+
+func (handler trackingHandler) DeleteWeightRegister(request model.DeleteWeightRegisterReq) model.FitnessResponse {
+	var response model.FitnessResponse
+	error := Repo.DeleteWeightRegister(request)
+	if error != nil {
+		responseStatus := mapper.ToBaseStatus(http.StatusBadRequest, model.BAD_REQUEST_ERROR_STATUS, model.DELETE_WEIGHT_REGISTER_ERROR)
 		mapper.ToFitnessResponse(&response, responseStatus, nil)
 		return response
 	}
