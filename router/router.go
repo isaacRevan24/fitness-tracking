@@ -17,6 +17,7 @@ type routerRegister struct{}
 
 type RouterRegisterInterface interface {
 	TrackingRouter(router *gin.RouterGroup)
+	GoalsRouter(router *gin.RouterGroup)
 }
 
 func NewRouterRegister() RouterRegisterInterface {
@@ -73,4 +74,8 @@ func (*routerRegister) TrackingRouter(router *gin.RouterGroup) {
 		response := trackingHandler.DeleteWeightRegister(request.Body)
 		context.JSON(response.Status.HttpStatus, response)
 	})
+}
+
+func (*routerRegister) GoalsRouter(router *gin.RouterGroup) {
+
 }
