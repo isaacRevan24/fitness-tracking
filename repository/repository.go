@@ -32,7 +32,16 @@ type TrackingRepository interface {
 	DeleteWeightRegister(request model.DeleteWeightRegisterReq) error
 }
 
+type GoalsRepository interface {
+	AddGoalsRegisters(request model.AddWeightGoalsReq) (model.AddWeightGoalsRes, error)
+}
+
 func NewTrackingRepository() TrackingRepository {
+	repo, _ := getConnection()
+	return repo
+}
+
+func NewGoalsRepository() GoalsRepository {
 	repo, _ := getConnection()
 	return repo
 }
@@ -108,4 +117,19 @@ func (r *Repo) DeleteWeightRegister(request model.DeleteWeightRegisterReq) error
 		return errors.New("row no afectado")
 	}
 	return nil
+}
+
+func (r *Repo) AddGoalsRegisters(request model.AddWeightGoalsReq) (model.AddWeightGoalsRes, error) {
+	sqlStatement := `INSERT INTO goals(id, weight, steps) VALUES($1, $2, $3) RETURNING weight, steps`
+	var weight float32 = 0.00
+	var steps int32 = 0
+
+	err := r.db.QueryRow(sqlStatement, request.ClientId, request.Weight, request.Steps).Scan(&weight, &steps)
+
+	if err != nil {
+		fmt.Println(err)
+		return model.AddWeightGoalsRes{}, err
+	}
+
+	return model.AddWeightGoalsRes{Weight: weight, Steps: steps}, nil
 }

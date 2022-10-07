@@ -60,3 +60,14 @@ type DeleteWeightRegisterReq struct {
 	WeightTrackId string `json:"weightTrackId" binding:"required"`
 	ClientId      string `json:"clientId" binding:"required"`
 }
+
+type AddWeightGoalsReq struct {
+	ClientId string  `json:"clientId" binding:"required"`
+	Weight   float32 `json:"weight" binding:"required"`
+	Steps    int32   `json:"steps" binding:"required"`
+}
+
+type AddWeightGoalsRes struct {
+	Weight float32 `json:"weight" binding:"required"`
+	Steps  int32   `json:"steps" binding:"required"`
+}
