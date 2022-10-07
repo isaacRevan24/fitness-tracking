@@ -9,11 +9,14 @@ import (
 )
 
 var (
-	Repo   repository.TrackingRepository = repository.NewTrackingRepository()
-	mapper model.FitnessMapper           = model.NewFitnessMapper()
+	Repo      repository.TrackingRepository = repository.NewTrackingRepository()
+	GoalsRepo repository.GoalsRepository    = repository.NewGoalsRepository()
+	mapper    model.FitnessMapper           = model.NewFitnessMapper()
 )
 
 type trackingHandler struct{}
+
+type goalsHandler struct{}
 
 type TrackingHandlerInterface interface {
 	AddWeightRegister(request model.AddWeightRegisterReq) model.FitnessResponse
@@ -22,8 +25,16 @@ type TrackingHandlerInterface interface {
 	DeleteWeightRegister(request model.DeleteWeightRegisterReq) model.FitnessResponse
 }
 
+type GoalsHandlerInterface interface {
+	AddGoalsRegisters(request model.AddWeightGoalsReq) model.FitnessResponse
+}
+
 func NewTrackingHandler() TrackingHandlerInterface {
 	return trackingHandler{}
+}
+
+func NewGoalsHandler() GoalsHandlerInterface {
+	return goalsHandler{}
 }
 
 func (handler trackingHandler) AddWeightRegister(request model.AddWeightRegisterReq) model.FitnessResponse {
@@ -76,5 +87,18 @@ func (handler trackingHandler) DeleteWeightRegister(request model.DeleteWeightRe
 	}
 	responseStatus := mapper.ToBaseStatus(http.StatusOK, model.SUCCESS_CODE_STATUS, model.SUCCESS_MESSAGE)
 	mapper.ToFitnessResponse(&response, responseStatus, nil)
+	return response
+}
+
+func (handler goalsHandler) AddGoalsRegisters(request model.AddWeightGoalsReq) model.FitnessResponse {
+	var response model.FitnessResponse
+	register, error := GoalsRepo.AddGoalsRegisters(request)
+	if error != nil {
+		responseStatus := mapper.ToBaseStatus(http.StatusBadRequest, model.BAD_REQUEST_ERROR_STATUS, model.ADD_GOALS_REGISTER_ERROR)
+		mapper.ToFitnessResponse(&response, responseStatus, nil)
+		return response
+	}
+	status := mapper.ToBaseStatus(http.StatusOK, model.SUCCESS_CODE_STATUS, model.SUCCESS_MESSAGE)
+	mapper.ToFitnessResponse(&response, status, register)
 	return response
 }
