@@ -54,3 +54,8 @@ type UpdateWeightRegisterReq struct {
 	WeightTrackId string  `json:"weightTrackId" binding:"required"`
 	Weight        float32 `json:"weight" binding:"required"`
 }
+
+type DeleteWeightRegisterReq struct {
+	WeightTrackId string `json:"weightTrackId" binding:"required"`
+	ClientId      string `json:"clientId" binding:"required"`
+}
