@@ -107,6 +107,5 @@ func (r *Repo) DeleteWeightRegister(request model.DeleteWeightRegisterReq) error
 		fmt.Println("Registros no afectado")
 		return errors.New("row no afectado")
 	}
-	fmt.Println(count)
 	return nil
 }

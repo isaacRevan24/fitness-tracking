@@ -13,6 +13,7 @@ const (
 	GET_WEIGHT_REGISTER_ERROR    = "Unable to get weight register."
 	INVALID_REQUEST              = "Invalid request parameters."
 	UPDATE_WEIGHT_REGISTER_ERROR = "Unable to update weight register."
+	DELETE_WEIGHT_REGISTER_ERROR = "Unable to delete weight register."
 )
 
 type BaseStatus struct {
