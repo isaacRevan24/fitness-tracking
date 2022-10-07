@@ -89,3 +89,40 @@ func (mr *MockTrackingHandlerInterfaceMockRecorder) UpdateWeightRegister(request
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateWeightRegister", reflect.TypeOf((*MockTrackingHandlerInterface)(nil).UpdateWeightRegister), request)
 }
+
+// MockGoalsHandlerInterface is a mock of GoalsHandlerInterface interface.
+type MockGoalsHandlerInterface struct {
+	ctrl     *gomock.Controller
+	recorder *MockGoalsHandlerInterfaceMockRecorder
+}
+
+// MockGoalsHandlerInterfaceMockRecorder is the mock recorder for MockGoalsHandlerInterface.
+type MockGoalsHandlerInterfaceMockRecorder struct {
+	mock *MockGoalsHandlerInterface
+}
+
+// NewMockGoalsHandlerInterface creates a new mock instance.
+func NewMockGoalsHandlerInterface(ctrl *gomock.Controller) *MockGoalsHandlerInterface {
+	mock := &MockGoalsHandlerInterface{ctrl: ctrl}
+	mock.recorder = &MockGoalsHandlerInterfaceMockRecorder{mock}
+	return mock
+}
+
+// EXPECT returns an object that allows the caller to indicate expected use.
+func (m *MockGoalsHandlerInterface) EXPECT() *MockGoalsHandlerInterfaceMockRecorder {
+	return m.recorder
+}
+
+// AddGoalsRegisters mocks base method.
+func (m *MockGoalsHandlerInterface) AddGoalsRegisters(request model.AddWeightGoalsReq) model.FitnessResponse {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "AddGoalsRegisters", request)
+	ret0, _ := ret[0].(model.FitnessResponse)
+	return ret0
+}
+
+// AddGoalsRegisters indicates an expected call of AddGoalsRegisters.
+func (mr *MockGoalsHandlerInterfaceMockRecorder) AddGoalsRegisters(request interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "AddGoalsRegisters", reflect.TypeOf((*MockGoalsHandlerInterface)(nil).AddGoalsRegisters), request)
+}

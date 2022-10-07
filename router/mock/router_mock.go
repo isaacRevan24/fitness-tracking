@@ -34,6 +34,18 @@ func (m *MockRouterRegisterInterface) EXPECT() *MockRouterRegisterInterfaceMockR
 	return m.recorder
 }
 
+// GoalsRouter mocks base method.
+func (m *MockRouterRegisterInterface) GoalsRouter(router *gin.RouterGroup) {
+	m.ctrl.T.Helper()
+	m.ctrl.Call(m, "GoalsRouter", router)
+}
+
+// GoalsRouter indicates an expected call of GoalsRouter.
+func (mr *MockRouterRegisterInterfaceMockRecorder) GoalsRouter(router interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GoalsRouter", reflect.TypeOf((*MockRouterRegisterInterface)(nil).GoalsRouter), router)
+}
+
 // TrackingRouter mocks base method.
 func (m *MockRouterRegisterInterface) TrackingRouter(router *gin.RouterGroup) {
 	m.ctrl.T.Helper()

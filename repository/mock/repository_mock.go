@@ -91,3 +91,41 @@ func (mr *MockTrackingRepositoryMockRecorder) UpdateWeightRegister(request inter
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "UpdateWeightRegister", reflect.TypeOf((*MockTrackingRepository)(nil).UpdateWeightRegister), request)
 }
+
+// MockGoalsRepository is a mock of GoalsRepository interface.
+type MockGoalsRepository struct {
+	ctrl     *gomock.Controller
+	recorder *MockGoalsRepositoryMockRecorder
+}
+
+// MockGoalsRepositoryMockRecorder is the mock recorder for MockGoalsRepository.
+type MockGoalsRepositoryMockRecorder struct {
+	mock *MockGoalsRepository
+}
+
+// NewMockGoalsRepository creates a new mock instance.
+func NewMockGoalsRepository(ctrl *gomock.Controller) *MockGoalsRepository {
+	mock := &MockGoalsRepository{ctrl: ctrl}
+	mock.recorder = &MockGoalsRepositoryMockRecorder{mock}
+	return mock
+}
+
+// EXPECT returns an object that allows the caller to indicate expected use.
+func (m *MockGoalsRepository) EXPECT() *MockGoalsRepositoryMockRecorder {
+	return m.recorder
+}
+
+// AddGoalsRegisters mocks base method.
+func (m *MockGoalsRepository) AddGoalsRegisters(request model.AddWeightGoalsReq) (model.AddWeightGoalsRes, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "AddGoalsRegisters", request)
+	ret0, _ := ret[0].(model.AddWeightGoalsRes)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// AddGoalsRegisters indicates an expected call of AddGoalsRegisters.
+func (mr *MockGoalsRepositoryMockRecorder) AddGoalsRegisters(request interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "AddGoalsRegisters", reflect.TypeOf((*MockGoalsRepository)(nil).AddGoalsRegisters), request)
+}
