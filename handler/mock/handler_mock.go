@@ -113,16 +113,16 @@ func (m *MockGoalsHandlerInterface) EXPECT() *MockGoalsHandlerInterfaceMockRecor
 	return m.recorder
 }
 
-// AddGoalsRegisters mocks base method.
-func (m *MockGoalsHandlerInterface) AddGoalsRegisters(request model.AddWeightGoalsReq) model.FitnessResponse {
+// AddGoalsRegister mocks base method.
+func (m *MockGoalsHandlerInterface) AddGoalsRegister(request model.AddWeightGoalsReq) model.FitnessResponse {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "AddGoalsRegisters", request)
+	ret := m.ctrl.Call(m, "AddGoalsRegister", request)
 	ret0, _ := ret[0].(model.FitnessResponse)
 	return ret0
 }
 
-// AddGoalsRegisters indicates an expected call of AddGoalsRegisters.
-func (mr *MockGoalsHandlerInterfaceMockRecorder) AddGoalsRegisters(request interface{}) *gomock.Call {
+// AddGoalsRegister indicates an expected call of AddGoalsRegister.
+func (mr *MockGoalsHandlerInterfaceMockRecorder) AddGoalsRegister(request interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "AddGoalsRegisters", reflect.TypeOf((*MockGoalsHandlerInterface)(nil).AddGoalsRegisters), request)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "AddGoalsRegister", reflect.TypeOf((*MockGoalsHandlerInterface)(nil).AddGoalsRegister), request)
 }

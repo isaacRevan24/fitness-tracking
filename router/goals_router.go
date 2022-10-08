@@ -19,7 +19,7 @@ func (*routerRegister) GoalsRouter(router *gin.RouterGroup) {
 			return
 		}
 		goalsHandler := handler.NewGoalsHandler()
-		response := goalsHandler.AddGoalsRegisters(request.Body)
+		response := goalsHandler.AddGoalsRegister(request.Body)
 		context.JSON(response.Status.HttpStatus, response)
 	})
 }

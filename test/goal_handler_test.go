@@ -35,7 +35,7 @@ var _ = Describe("Goals handler tests", func() {
 			request := model.AddWeightGoalsReq{ClientId: "c209cac7-6901-42a1-8e3f-632aecd9911d", Weight: 99.9, Steps: 13000}
 
 			// When
-			response := underTest.AddGoalsRegisters(request)
+			response := underTest.AddGoalsRegister(request)
 
 			// Then
 			Expect(response.Status.Code).Should(Equal(model.SUCCESS_CODE_STATUS))
@@ -52,7 +52,7 @@ var _ = Describe("Goals handler tests", func() {
 			request := model.AddWeightGoalsReq{ClientId: "c209cac7-6901-42a1-8e3f-632aecd9911d", Weight: 99.9, Steps: 13000}
 
 			// When
-			response := underTest.AddGoalsRegisters(request)
+			response := underTest.AddGoalsRegister(request)
 
 			// Then
 			Expect(response.Status.Code).Should(Equal(model.BAD_REQUEST_ERROR_STATUS))

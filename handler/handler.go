@@ -24,7 +24,7 @@ type TrackingHandlerInterface interface {
 }
 
 type GoalsHandlerInterface interface {
-	AddGoalsRegisters(request model.AddWeightGoalsReq) model.FitnessResponse
+	AddGoalsRegister(request model.AddWeightGoalsReq) model.FitnessResponse
 }
 
 func NewTrackingHandler() TrackingHandlerInterface {

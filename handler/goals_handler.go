@@ -6,7 +6,7 @@ import (
 	"github.com/isaacRevan24/fitness-tracking/model"
 )
 
-func (handler goalsHandler) AddGoalsRegisters(request model.AddWeightGoalsReq) model.FitnessResponse {
+func (handler goalsHandler) AddGoalsRegister(request model.AddWeightGoalsReq) model.FitnessResponse {
 	var response model.FitnessResponse
 	register, error := GoalsRepo.AddGoalsRegister(request)
 	if error != nil {
