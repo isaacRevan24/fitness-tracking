@@ -72,3 +72,12 @@ type AddWeightGoalsRes struct {
 	Weight float32 `json:"weight" binding:"required"`
 	Steps  int32   `json:"steps" binding:"required"`
 }
+
+type GetGoalsReq struct {
+	ClientId string `json:"clientId" binding:"required"`
+}
+
+type GetGoalsRes struct {
+	Weight float32 `json:"weight" binding:"required"`
+	Steps  int32   `json:"steps" binding:"required"`
+}

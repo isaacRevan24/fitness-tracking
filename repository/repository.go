@@ -31,6 +31,7 @@ type TrackingRepository interface {
 
 type GoalsRepository interface {
 	AddGoalsRegister(request model.AddWeightGoalsReq) (model.AddWeightGoalsRes, error)
+	GetGoalsRegister(clientId string) (model.GetGoalsRes, error)
 }
 
 func NewTrackingRepository() TrackingRepository {

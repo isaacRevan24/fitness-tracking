@@ -20,3 +20,13 @@ func (r *Repo) AddGoalsRegister(request model.AddWeightGoalsReq) (model.AddWeigh
 
 	return model.AddWeightGoalsRes{Weight: weight, Steps: steps}, nil
 }
+
+func (r *Repo) GetGoalsRegister(clientId string) (model.GetGoalsRes, error) {
+	sqlStatement := `SELECT weight, steps FROM goals WHERE id=$1';`
+	var goals model.GetGoalsRes
+	err := r.db.QueryRow(sqlStatement, clientId).Scan(&goals.Weight, &goals.Steps)
+	if err != nil {
+		return model.GetGoalsRes{}, err
+	}
+	return goals, nil
+}

@@ -129,3 +129,18 @@ func (mr *MockGoalsRepositoryMockRecorder) AddGoalsRegister(request interface{})
 	mr.mock.ctrl.T.Helper()
 	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "AddGoalsRegister", reflect.TypeOf((*MockGoalsRepository)(nil).AddGoalsRegister), request)
 }
+
+// GetGoalsRegister mocks base method.
+func (m *MockGoalsRepository) GetGoalsRegister(clientId string) (model.GetGoalsRes, error) {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "GetGoalsRegister", clientId)
+	ret0, _ := ret[0].(model.GetGoalsRes)
+	ret1, _ := ret[1].(error)
+	return ret0, ret1
+}
+
+// GetGoalsRegister indicates an expected call of GetGoalsRegister.
+func (mr *MockGoalsRepositoryMockRecorder) GetGoalsRegister(clientId interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "GetGoalsRegister", reflect.TypeOf((*MockGoalsRepository)(nil).GetGoalsRegister), clientId)
+}
