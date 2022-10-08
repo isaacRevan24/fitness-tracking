@@ -26,6 +26,7 @@ func (r *Repo) GetGoalsRegister(clientId string) (model.GetGoalsRes, error) {
 	var goals model.GetGoalsRes
 	err := r.db.QueryRow(sqlStatement, clientId).Scan(&goals.Weight, &goals.Steps)
 	if err != nil {
+		fmt.Println(err)
 		return model.GetGoalsRes{}, err
 	}
 	return goals, nil

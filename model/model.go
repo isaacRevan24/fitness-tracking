@@ -15,6 +15,7 @@ const (
 	UPDATE_WEIGHT_REGISTER_ERROR = "Unable to update weight register."
 	DELETE_WEIGHT_REGISTER_ERROR = "Unable to delete weight register."
 	ADD_GOALS_REGISTER_ERROR     = "Unable to add goals register."
+	GET_GOALS_REGISTER_ERROR     = "Unable to get goals register."
 )
 
 type BaseStatus struct {
