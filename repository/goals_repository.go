@@ -6,7 +6,7 @@ import (
 	"github.com/isaacRevan24/fitness-tracking/model"
 )
 
-func (r *Repo) AddGoalsRegisters(request model.AddWeightGoalsReq) (model.AddWeightGoalsRes, error) {
+func (r *Repo) AddGoalsRegister(request model.AddWeightGoalsReq) (model.AddWeightGoalsRes, error) {
 	sqlStatement := `INSERT INTO goals(id, weight, steps) VALUES($1, $2, $3) RETURNING weight, steps`
 	var weight float32 = 0.00
 	var steps int32 = 0

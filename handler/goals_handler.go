@@ -8,7 +8,7 @@ import (
 
 func (handler goalsHandler) AddGoalsRegisters(request model.AddWeightGoalsReq) model.FitnessResponse {
 	var response model.FitnessResponse
-	register, error := GoalsRepo.AddGoalsRegisters(request)
+	register, error := GoalsRepo.AddGoalsRegister(request)
 	if error != nil {
 		responseStatus := mapper.ToBaseStatus(http.StatusBadRequest, model.BAD_REQUEST_ERROR_STATUS, model.ADD_GOALS_REGISTER_ERROR)
 		mapper.ToFitnessResponse(&response, responseStatus, nil)

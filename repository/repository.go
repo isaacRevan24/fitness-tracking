@@ -30,7 +30,7 @@ type TrackingRepository interface {
 }
 
 type GoalsRepository interface {
-	AddGoalsRegisters(request model.AddWeightGoalsReq) (model.AddWeightGoalsRes, error)
+	AddGoalsRegister(request model.AddWeightGoalsReq) (model.AddWeightGoalsRes, error)
 }
 
 func NewTrackingRepository() TrackingRepository {

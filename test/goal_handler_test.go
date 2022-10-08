@@ -29,7 +29,7 @@ var _ = Describe("Goals handler tests", func() {
 		It("Should save goals entry successfully", func() {
 			// Mock
 			mockResponse := model.AddWeightGoalsRes{Weight: 99.9, Steps: 13000}
-			mockRepository.EXPECT().AddGoalsRegisters(gomock.Any()).Return(mockResponse, nil)
+			mockRepository.EXPECT().AddGoalsRegister(gomock.Any()).Return(mockResponse, nil)
 
 			// Given
 			request := model.AddWeightGoalsReq{ClientId: "c209cac7-6901-42a1-8e3f-632aecd9911d", Weight: 99.9, Steps: 13000}
@@ -46,7 +46,7 @@ var _ = Describe("Goals handler tests", func() {
 		It("Should fail to save goals entry", func() {
 			// Mock
 			mockResponse := model.AddWeightGoalsRes{}
-			mockRepository.EXPECT().AddGoalsRegisters(gomock.Any()).Return(mockResponse, errors.New("error"))
+			mockRepository.EXPECT().AddGoalsRegister(gomock.Any()).Return(mockResponse, errors.New("error"))
 
 			// Given
 			request := model.AddWeightGoalsReq{ClientId: "c209cac7-6901-42a1-8e3f-632aecd9911d", Weight: 99.9, Steps: 13000}
