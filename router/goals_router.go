@@ -19,15 +19,10 @@ func (*routerRegister) GoalsRouter(router *gin.RouterGroup) {
 		context.JSON(response.Status.HttpStatus, response)
 	})
 
-	router.GET("/", func(context *gin.Context) {
-		var request model.FitnessRequest[model.GetGoalsReq]
-		parsingError := mapper.GenericRequestJsonMapper(&request, context)
-		if parsingError != nil {
-			parsingErrorResponse(context)
-			return
-		}
+	router.GET("/:clientId", func(context *gin.Context) {
+		clientId := context.Param("clientId")
 		goalsHandler := handler.NewGoalsHandler()
-		response := goalsHandler.GetGoalsRegister(request.Body)
+		response := goalsHandler.GetGoalsRegister(clientId)
 		context.JSON(response.Status.HttpStatus, response)
 	})
 }
