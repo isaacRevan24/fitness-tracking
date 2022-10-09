@@ -1,8 +1,6 @@
 package router
 
 import (
-	"net/http"
-
 	"github.com/gin-gonic/gin"
 	"github.com/isaacRevan24/fitness-tracking/handler"
 	"github.com/isaacRevan24/fitness-tracking/model"
@@ -13,9 +11,7 @@ func (*routerRegister) TrackingRouter(router *gin.RouterGroup) {
 		var request model.FitnessRequest[model.AddWeightRegisterReq]
 		parsingError := mapper.GenericRequestJsonMapper(&request, context)
 		if parsingError != nil {
-			var response model.FitnessStatusResponse
-			mapper.ToStatusResponse(&response, http.StatusBadRequest, model.BAD_REQUEST_ERROR_STATUS, model.INVALID_REQUEST)
-			context.JSON(response.Status.HttpStatus, response)
+			parsingErrorResponse(context)
 			return
 		}
 		trackingHandler := handler.NewTrackingHandler()
@@ -35,9 +31,7 @@ func (*routerRegister) TrackingRouter(router *gin.RouterGroup) {
 		var request model.FitnessRequest[model.UpdateWeightRegisterReq]
 		parsingError := mapper.GenericRequestJsonMapper(&request, context)
 		if parsingError != nil {
-			var response model.FitnessStatusResponse
-			mapper.ToStatusResponse(&response, http.StatusBadRequest, model.BAD_REQUEST_ERROR_STATUS, model.INVALID_REQUEST)
-			context.JSON(response.Status.HttpStatus, response)
+			parsingErrorResponse(context)
 			return
 		}
 		trackingHandler := handler.NewTrackingHandler()
@@ -49,9 +43,7 @@ func (*routerRegister) TrackingRouter(router *gin.RouterGroup) {
 		var request model.FitnessRequest[model.DeleteWeightRegisterReq]
 		parsingError := mapper.GenericRequestJsonMapper(&request, context)
 		if parsingError != nil {
-			var response model.FitnessStatusResponse
-			mapper.ToStatusResponse(&response, http.StatusBadRequest, model.BAD_REQUEST_ERROR_STATUS, model.INVALID_REQUEST)
-			context.JSON(response.Status.HttpStatus, response)
+			parsingErrorResponse(context)
 			return
 		}
 		trackingHandler := handler.NewTrackingHandler()

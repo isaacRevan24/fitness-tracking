@@ -2,6 +2,8 @@
 package router
 
 import (
+	"net/http"
+
 	"github.com/gin-gonic/gin"
 	"github.com/isaacRevan24/fitness-tracking/model"
 )
@@ -19,4 +21,10 @@ type RouterRegisterInterface interface {
 
 func NewRouterRegister() RouterRegisterInterface {
 	return &routerRegister{}
+}
+
+func parsingErrorResponse(context *gin.Context) {
+	var response model.FitnessStatusResponse
+	mapper.ToStatusResponse(&response, http.StatusBadRequest, model.BAD_REQUEST_ERROR_STATUS, model.INVALID_REQUEST)
+	context.JSON(response.Status.HttpStatus, response)
 }
