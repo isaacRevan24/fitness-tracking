@@ -14,8 +14,7 @@ func (handler goalsHandler) AddGoalsRegister(request model.AddWeightGoalsReq) mo
 		mapper.ToFitnessResponse(&response, responseStatus, nil)
 		return response
 	}
-	status := mapper.ToBaseStatus(http.StatusOK, model.SUCCESS_CODE_STATUS, model.SUCCESS_MESSAGE)
-	mapper.ToFitnessResponse(&response, status, register)
+	mapper.ToFitnessResponse(&response, buildSuccessMessageStatus(), register)
 	return response
 }
 
@@ -29,8 +28,4 @@ func (handler goalsHandler) GetGoalsRegister(request model.GetGoalsReq) model.Fi
 	}
 	mapper.ToFitnessResponse(&response, buildSuccessMessageStatus(), register)
 	return response
-}
-
-func buildSuccessMessageStatus() model.BaseStatus {
-	return mapper.ToBaseStatus(http.StatusOK, model.SUCCESS_CODE_STATUS, model.SUCCESS_MESSAGE)
 }

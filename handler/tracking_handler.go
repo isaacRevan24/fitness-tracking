@@ -14,9 +14,8 @@ func (handler trackingHandler) AddWeightRegister(request model.AddWeightRegister
 		mapper.ToFitnessResponse(&response, responseStatus, nil)
 		return response
 	}
-	responseStatus := mapper.ToBaseStatus(http.StatusOK, model.SUCCESS_CODE_STATUS, model.SUCCESS_MESSAGE)
 	responseBody := model.AddWeightRegisterRes{WeightTrackId: id}
-	mapper.ToFitnessResponse(&response, responseStatus, responseBody)
+	mapper.ToFitnessResponse(&response, buildSuccessMessageStatus(), responseBody)
 	return response
 }
 
@@ -28,8 +27,7 @@ func (handler trackingHandler) GetWeightRegister(clientId string, weightId strin
 		mapper.ToFitnessResponse(&response, responseStatus, nil)
 		return response
 	}
-	responseStatus := mapper.ToBaseStatus(http.StatusOK, model.SUCCESS_CODE_STATUS, model.SUCCESS_MESSAGE)
-	mapper.ToFitnessResponse(&response, responseStatus, register)
+	mapper.ToFitnessResponse(&response, buildSuccessMessageStatus(), register)
 	return response
 }
 
@@ -41,8 +39,7 @@ func (handler trackingHandler) UpdateWeightRegister(request model.UpdateWeightRe
 		mapper.ToFitnessResponse(&response, responseStatus, nil)
 		return response
 	}
-	responseStatus := mapper.ToBaseStatus(http.StatusOK, model.SUCCESS_CODE_STATUS, model.SUCCESS_MESSAGE)
-	mapper.ToFitnessResponse(&response, responseStatus, nil)
+	mapper.ToFitnessResponse(&response, buildSuccessMessageStatus(), nil)
 	return response
 }
 
@@ -54,7 +51,6 @@ func (handler trackingHandler) DeleteWeightRegister(request model.DeleteWeightRe
 		mapper.ToFitnessResponse(&response, responseStatus, nil)
 		return response
 	}
-	responseStatus := mapper.ToBaseStatus(http.StatusOK, model.SUCCESS_CODE_STATUS, model.SUCCESS_MESSAGE)
-	mapper.ToFitnessResponse(&response, responseStatus, nil)
+	mapper.ToFitnessResponse(&response, buildSuccessMessageStatus(), nil)
 	return response
 }

@@ -2,6 +2,8 @@
 package handler
 
 import (
+	"net/http"
+
 	"github.com/isaacRevan24/fitness-tracking/model"
 	"github.com/isaacRevan24/fitness-tracking/repository"
 )
@@ -34,4 +36,8 @@ func NewTrackingHandler() TrackingHandlerInterface {
 
 func NewGoalsHandler() GoalsHandlerInterface {
 	return goalsHandler{}
+}
+
+func buildSuccessMessageStatus() model.BaseStatus {
+	return mapper.ToBaseStatus(http.StatusOK, model.SUCCESS_CODE_STATUS, model.SUCCESS_MESSAGE)
 }
