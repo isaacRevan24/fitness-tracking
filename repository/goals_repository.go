@@ -31,3 +31,14 @@ func (r *Repo) GetGoalsRegister(clientId string) (model.GetGoalsRes, error) {
 	}
 	return goals, nil
 }
+
+func (r *Repo) UpdateWeightGoal(request model.UpdateWeightGoalReq) (model.UpdateWeightGoalRes, error) {
+	sqlStatement := `UPDATE goals SET weight=$2 WHERE id=$1 RETURNING weight`
+	var goals model.UpdateWeightGoalRes
+	err := r.db.QueryRow(sqlStatement, request.ClientId, request.Weight).Scan(&goals.Weight)
+	if err != nil {
+		fmt.Println(err)
+		return model.UpdateWeightGoalRes{}, err
+	}
+	return goals, nil
+}
