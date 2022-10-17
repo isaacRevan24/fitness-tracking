@@ -10,13 +10,30 @@ import (
 	_ "github.com/lib/pq"
 )
 
-const (
-	host     = "localhost"
-	port     = 5432
-	user     = "postgres"
-	password = "postgres"
-	dbname   = "fitness"
-)
+func init() {
+	host := "localhost"
+	port := "5432"
+	user := "postgres"
+	password := "postgres"
+	dbname := "fitness"
+	connection = connectionInfo{
+		host:     host,
+		port:     port,
+		user:     user,
+		password: password,
+		dbname:   dbname,
+	}
+}
+
+var connection connectionInfo
+
+type connectionInfo struct {
+	host     string
+	port     string
+	user     string
+	password string
+	dbname   string
+}
 
 type Repo struct {
 	db *sql.DB
@@ -46,7 +63,10 @@ func NewGoalsRepository() GoalsRepository {
 }
 
 func getConnection() (*Repo, error) {
-	db, err := sql.Open("postgres", fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s sslmode=disable", host, port, user, password, dbname))
+	fmt.Println("connection getter")
+	db, err := sql.Open("postgres",
+		fmt.Sprintf("host=%s port=%s user=%s password=%s dbname=%s sslmode=disable",
+			connection.host, connection.port, connection.user, connection.password, connection.dbname))
 	if err != nil {
 		log.Fatal("Failed to open a DB connection: ", err)
 		return nil, err
